@@ -40,8 +40,8 @@ public class PersonLinkedList implements Iterable<Person>
 	{
 		PersonNode newNode = new PersonNode(person);
 		
-		if (isEmpty() == true || this.firstNameNode.compareTo(newNode) > 0 && 
-			this.firstAgeNode.compareToAge(newNode) > 0)
+		if (isEmpty() == true || this.firstNameNode.compareTo(newNode) > 0 
+				&& this.firstAgeNode.compareToAge(newNode) > 0)
 		{
 			newNode.setNextNameNode(this.firstNameNode);
 			newNode.setNextAgeNode(this.firstAgeNode);
@@ -65,8 +65,8 @@ public class PersonLinkedList implements Iterable<Person>
 	private void addPersonName(PersonNode newNode)
 	{
 		PersonNode currentNode = this.firstNameNode;
-		while (currentNode.getNextNameNode() != null && 
-				currentNode.getNextNameNode().compareTo(newNode) < 0)
+		while (currentNode.getNextNameNode() != null 
+				&& currentNode.getNextNameNode().compareTo(newNode) < 0)
 		{
 			currentNode = currentNode.getNextNameNode();
 		}
@@ -86,7 +86,7 @@ public class PersonLinkedList implements Iterable<Person>
 	{
 		PersonNode currentNode = this.firstAgeNode;
 		while (currentNode.getNextAgeNode() != null && 
-               currentNode.getNextAgeNode().compareToAge(newNode) < 0)
+				currentNode.getNextAgeNode().compareToAge(newNode) < 0)
 		{
 			currentNode = currentNode.getNextAgeNode();
 		}
