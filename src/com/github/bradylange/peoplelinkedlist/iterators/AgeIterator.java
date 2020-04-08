@@ -2,7 +2,7 @@
  * Developer: Brady Lange
  * Class: AgeIterator
  * Development Language: Java
- * Copyright Notice: MIT License, Copyright (c) 2019 Brady Lange
+ * Copyright Notice: MIT License, Copyright (c) 2020 Brady Lange
  */
 
 package com.github.bradylange.peoplelinkedlist.iterators;
@@ -18,14 +18,15 @@ public class AgeIterator implements Iterator<Person>
 	private PersonNode curPersonNode;
 	
 	// ========================================================================
-	// Default Constructor
+	// Alternate Constructor
 	// ========================================================================
 	/**
 	 * 
+	 * @param node
 	 */
-	public AgeIterator()
+	public AgeIterator(PersonNode node)
 	{
-		this.curPersonNode = null;
+		this.curPersonNode = node;
 	}
 	
 	// ========================================================================
@@ -38,7 +39,7 @@ public class AgeIterator implements Iterator<Person>
 	@Override
 	public boolean hasNext()
 	{
-		return false;
+		return curPersonNode != null;
 	}
 
 	// ========================================================================
@@ -51,6 +52,8 @@ public class AgeIterator implements Iterator<Person>
 	@Override
 	public Person next()
 	{
-		return null;
+		Person currentPersonData = this.curPersonNode.getData();
+		this.curPersonNode = this.curPersonNode.getNextAgeNode();
+		return currentPersonData;
 	}
 }

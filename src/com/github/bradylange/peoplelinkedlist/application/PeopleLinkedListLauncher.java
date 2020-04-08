@@ -2,16 +2,17 @@
  * Developer: Brady Lange
  * Class: PeopleLinkedListLauncher
  * Development Language: Java
- * Copyright Notice: MIT License, Copyright (c) 2019 Brady Lange
+ * Copyright Notice: MIT License, Copyright (c) 2020 Brady Lange
  */
 
 package com.github.bradylange.peoplelinkedlist.application;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
+import java.io.IOException;
 
+import com.github.bradylange.peoplelinkedlist.iterators.AgeIterator;
+import com.github.bradylange.peoplelinkedlist.iterators.NameIterator;
 import com.github.bradylange.peoplelinkedlist.linkedlist.PersonLinkedList;
 import com.github.bradylange.peoplelinkedlist.people.Person;
 
@@ -21,36 +22,88 @@ public class PeopleLinkedListLauncher
 	// Main Method
 	// ========================================================================
 	/**
-	 * Instantiates and sets up #.
+	 * Instantiates and sets up a {@link PersonLinkedList} that has the ability
+	 * to iterate by alphabetically ordered names or numerically ascending
+	 * ages.
 	 * 
 	 * @param args  the array of command line arguments to be passed
 	 * 
-	 * @version  1.0.0, 03/24/2020
-	 * @since  1.0, 03/24/2020
+	 * @throws IOException
+	 * 
+	 * @version  1.0.0, 04/07/2020
+	 * @since  1.0, 04/07/2020
 	 */
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
-		
+		PersonLinkedList peopleList = loadData("./data/people.txt");
+		System.out.println("Print by Alphabetical Order of Name:");
+		System.out.println("************************************************");
+		printLinkedListByName(peopleList);
+		System.out.println("\nPrint by Numerical Ascending Order of Age:");
+		System.out.println("************************************************");
+		printLinkedListByAge(peopleList);
 	}
 	
-	public static PersonLinkedList loadData(String filePath)
+	// ========================================================================
+	// Person Linked List Method
+	// ========================================================================
+	/**
+	 * 
+	 * @param filePath
+	 * @return
+	 * @throws IOException
+	 */
+	public static PersonLinkedList loadData(String filePath) throws IOException
 	{
-		PersonLinkedList personLinkedList = new PersonLinkedList();
-		ArrayList<Person> people = new ArrayList<Person>();
-		Person tempPerson = new Person();
-		String name;
+		PersonLinkedList peopleLinkedList = new PersonLinkedList();
+		Person tempPerson;
+		String[] lineWords;
+		String fullName;
 		int age;
 		BufferedReader inFile = new BufferedReader(new FileReader(filePath));
 		String ln = inFile.readLine();
-		StringTokenizer personTokenizer = new StringTokenizer(ln, "\\d\\w");
-		while (personTokenizer.hasMoreTokens() == true)
+		while (ln != null)
 		{
-			StringTokenizer nameAgeTokenizer = new StringTokenizer(personTokenizer.nextToken(), ",");
-			name = nameAgeTokenizer.nextToken();
-			age = Integer.parseInt(nameAgeTokenizer.nextToken());
-			tempPerson.setFirstName(name);
-			people.add(tempPerson);
+			lineWords = ln.split(", ");
+			fullName = lineWords[0];
+			age = Integer.parseInt(lineWords[1]);
+			tempPerson = new Person(fullName, age);
+			peopleLinkedList.addPerson(tempPerson);
+			ln = inFile.readLine();
 		}
-		
+		inFile.close();
+		return peopleLinkedList;
+	}
+	
+	// ========================================================================
+	// Print Linked List By Name Method
+	// ========================================================================
+	/**
+	 * 
+	 * @param pplLinkedList
+	 */
+	public static void printLinkedListByName(PersonLinkedList pplLinkedList)
+	{
+		NameIterator nameIterator = pplLinkedList.iterator();
+		while (nameIterator.hasNext())
+		{
+			System.out.println(nameIterator.next());
+		}
+	}
+	
+	// ========================================================================
+	// Print Linked List By Age Method
+	// ========================================================================
+	/**
+	 * 
+	 * @param pplLinkedList
+	 */
+	public static void printLinkedListByAge(PersonLinkedList pplLinkedList)
+	{
+		AgeIterator ageIterator = pplLinkedList.ageIterator();
+		while (ageIterator.hasNext())
+		{
+			System.out.println(ageIterator.next());
+		}
 	}
 }

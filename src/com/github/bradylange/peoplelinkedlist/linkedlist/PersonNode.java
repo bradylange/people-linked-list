@@ -2,7 +2,7 @@
  * Developer: Brady Lange
  * Class: PersonNode
  * Development Language: Java
- * Copyright Notice: MIT License, Copyright (c) 2019 Brady Lange
+ * Copyright Notice: MIT License, Copyright (c) 2020 Brady Lange
  */
 
 package com.github.bradylange.peoplelinkedlist.linkedlist;
@@ -37,9 +37,7 @@ public class PersonNode implements Comparable<PersonNode>
 	 */
 	public PersonNode(Person data)
 	{
-		this.data.setFirstName(data.getFirstName());
-		this.data.setLastName(data.getLastName());
-		this.data.setAge(data.getAge());
+		this.data = new Person(data.getFullName(), data.getAge());
 	}
 	
 	// ========================================================================
@@ -81,27 +79,63 @@ public class PersonNode implements Comparable<PersonNode>
 	}
 	
 	// ========================================================================
-	// Get Next Name Method
+	// Set Next Name Node Method
+	// ========================================================================
+	/**
+	 * 
+	 * @param node
+	 */
+	public void setNextNameNode(PersonNode node)
+	{
+		this.nextNameNode = node;
+	}
+	
+	// ========================================================================
+	// Set Next Age Node Method
+	// ========================================================================
+	/**
+	 * 
+	 * @param node
+	 */
+	public void setNextAgeNode(PersonNode node)
+	{
+		this.nextAgeNode = node;
+	}
+	
+	// ========================================================================
+	// Get Next Name Node Method
 	// ========================================================================
 	/**
 	 * 
 	 * @return
 	 */
-	public PersonNode getNextName()
+	public PersonNode getNextNameNode()
+	{
+		return this.nextNameNode;
+	}
+	
+	// ========================================================================
+	// Get Next Age Node Method
+	// ========================================================================
+	/**
+	 * 
+	 * @return
+	 */
+	public PersonNode getNextAgeNode()
 	{
 		return this.nextAgeNode;
 	}
 	
 	// ========================================================================
-	// get Next Age Method
+	// Get Data Method
 	// ========================================================================
 	/**
 	 * 
 	 * @return
 	 */
-	public PersonNode getNextAge()
+	public Person getData()
 	{
-		return this.nextAgeNode;
+		return this.data;
 	}
 	
 	// ========================================================================

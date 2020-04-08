@@ -2,7 +2,7 @@
  * Developer: Brady Lange
  * Class: Person
  * Development Language: Java
- * Copyright Notice: MIT License, Copyright (c) 2019 Brady Lange
+ * Copyright Notice: MIT License, Copyright (c) 2020 Brady Lange
  */
 
 package com.github.bradylange.peoplelinkedlist.people;
@@ -10,8 +10,6 @@ package com.github.bradylange.peoplelinkedlist.people;
 public class Person implements Comparable<Person>
 {
 	// Instance variables
-	private String firstName;
-	private String lastName;
 	private String fullName;
 	private int age;
 	
@@ -23,9 +21,7 @@ public class Person implements Comparable<Person>
 	 */
 	public Person()
 	{
-		this.firstName = "";
-		this.lastName = "";
-		createFullName("", "");
+		this.fullName = "";
 		this.age = -1;
 	}
 	
@@ -34,53 +30,25 @@ public class Person implements Comparable<Person>
 	// ========================================================================
 	/**
 	 * 
-	 * @param firstName
-	 * @param lastName
+	 * @param fullName
 	 * @param age
 	 */
-	public Person(String firstName, String lastName, int age)
+	public Person(String fullName, int age)
 	{
-		this.firstName = firstName;
-		this.lastName = lastName;
-		createFullName(this.firstName, this.lastName);
+		this.fullName = fullName;
 		this.age = age;
 	}
 	
 	// ========================================================================
-	// Set First Name Method
+	// Set Full Name Method
 	// ========================================================================
 	/**
 	 * 
-	 * @param firstName
+	 * @param fullName
 	 */
-	public void setFirstName(String firstName)
+	public void setFullName(String fullName)
 	{
-		this.firstName = firstName;
-	}
-	
-	// ========================================================================
-	// Set Last Name Method
-	// ========================================================================
-	/**
-	 * 
-	 * @param lastName
-	 */
-	public void setLastName(String lastName)
-	{
-		this.lastName = lastName;
-	}
-	
-	// ========================================================================
-	// Create Full Name Method
-	// ========================================================================
-	/**
-	 * 
-	 * @param firstName
-	 * @param lastName
-	 */
-	public void createFullName(String firstName, String lastName)
-	{
-		this.fullName = firstName + " " + lastName;
+		this.fullName = fullName;
 	}
 	
 	// ========================================================================
@@ -93,30 +61,6 @@ public class Person implements Comparable<Person>
 	public void setAge(int age)
 	{
 		this.age = age;
-	}
-	
-	// ========================================================================
-	// Get First Name Method
-	// ========================================================================
-	/**
-	 * 
-	 * @return
-	 */
-	public String getFirstName()
-	{
-		return this.firstName;
-	}
-	
-	// ========================================================================
-	// Get Last Name Method
-	// ========================================================================
-	/**
-	 * 
-	 * @return
-	 */
-	public String getLastName()
-	{
-		return this.lastName;
 	}
 	
 	// ========================================================================
@@ -178,11 +122,11 @@ public class Person implements Comparable<Person>
 	 */
 	public int compareToAge(Person person)
 	{
-		if (this.fullName.compareTo(person.fullName) < 0)
+		if (this.age < person.age)
 		{
 			return -1;
 		}
-		else if (this.fullName.compareTo(person.fullName) > 0)
+		else if (this.age > person.age)
 		{
 			return 1;
 		}
@@ -201,6 +145,6 @@ public class Person implements Comparable<Person>
 	 */
 	public String toString()
 	{
-		return firstName + " | " + lastName + " | " + age;
+		return fullName + " | " + age;
 	}
 }
