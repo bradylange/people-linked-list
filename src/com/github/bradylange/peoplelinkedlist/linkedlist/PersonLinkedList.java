@@ -40,8 +40,7 @@ public class PersonLinkedList implements Iterable<Person>
 	{
 		PersonNode newNode = new PersonNode(person);
 		
-		if (isEmpty() == true || this.firstNameNode.compareTo(newNode) > 0 
-				&& this.firstAgeNode.compareToAge(newNode) > 0)
+		if (isEmpty() == true)
 		{
 			newNode.setNextNameNode(this.firstNameNode);
 			newNode.setNextAgeNode(this.firstAgeNode);
@@ -64,15 +63,23 @@ public class PersonLinkedList implements Iterable<Person>
 	 */
 	private void addPersonName(PersonNode newNode)
 	{
-		PersonNode currentNode = this.firstNameNode;
-		while (currentNode.getNextNameNode() != null 
-				&& currentNode.getNextNameNode().compareTo(newNode) < 0)
+		if (this.firstNameNode.compareTo(newNode) > 0)
 		{
-			currentNode = currentNode.getNextNameNode();
+			newNode.setNextNameNode(this.firstNameNode);
+			this.firstNameNode = newNode;
 		}
-		
-		newNode.setNextNameNode(currentNode.getNextNameNode());
-		currentNode.setNextNameNode(newNode);
+		else
+		{
+			PersonNode currentNode = this.firstNameNode;
+			while (currentNode.getNextNameNode() != null 
+					&& currentNode.getNextNameNode().compareTo(newNode) < 0)
+			{
+				currentNode = currentNode.getNextNameNode();
+			}
+			
+			newNode.setNextNameNode(currentNode.getNextNameNode());
+			currentNode.setNextNameNode(newNode);
+		}
 	}
 	
 	// ========================================================================
@@ -84,15 +91,23 @@ public class PersonLinkedList implements Iterable<Person>
 	 */
 	private void addPersonAge(PersonNode newNode)
 	{
-		PersonNode currentNode = this.firstAgeNode;
-		while (currentNode.getNextAgeNode() != null && 
-				currentNode.getNextAgeNode().compareToAge(newNode) < 0)
+		if (this.firstAgeNode.compareToAge(newNode) > 0)
 		{
-			currentNode = currentNode.getNextAgeNode();
+			newNode.setNextAgeNode(this.firstAgeNode);
+			this.firstAgeNode = newNode;
 		}
-		
-		newNode.setNextAgeNode(currentNode.getNextAgeNode());
-		currentNode.setNextAgeNode(newNode);
+		else
+		{
+			PersonNode currentNode = this.firstAgeNode;
+			while (currentNode.getNextAgeNode() != null && 
+					currentNode.getNextAgeNode().compareToAge(newNode) < 0)
+			{
+				currentNode = currentNode.getNextAgeNode();
+			}
+			
+			newNode.setNextAgeNode(currentNode.getNextAgeNode());
+			currentNode.setNextAgeNode(newNode);
+		}
 	}
 	
 	// ========================================================================
